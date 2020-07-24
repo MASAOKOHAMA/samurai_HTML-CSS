@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .screenBlue {
+      height: 100vh;
+      color: #fff;
+      font-size: 5em;
+      text-align: center;
+      background-color: #88f;
+    }
+
+    .screenRed {
+      height: 100vh;
+      color: #fff;
+      font-size: 5em;
+      text-align: center;
+      background-color: #f88;
+    }
+    .pagetop {
+      display: none;
+      padding: 40px 10px;
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 50%;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+  <div class="screenBlue">ここがトップページです</div>
+  <div class="screenRed">2ページ目</div>
+  <div class="screenBlue">3ページ目</div>
+  <div class="screenRed">4ページ目</div>
+  <div class="screenBlue">5ページ目</div>
+  <a class="pagetop" id="top" style="display: inline;">TOPに戻る</a>
+  <script>
+    const topLink = document.getElementById("top");
+    window.addEventListener("scroll", () => {
+      const scrollValue = document.scrollingElement.scrollTop;
+      if (scrollValue >= 300) {
+          topLink.style.display = "inline";
+      } else if (scrollValue < 300) {
+          topLink.style.display = "none";
+      }
+    });
+    topLink.addEventListener("click", () => {
+      let scrollValue = document.scrollingElement.scrollTop;
+      const timer = setInterval(() => {
+        if (scrollValue < 0) {
+          clearInterval(timer);
+          console.log("停止");
+        }
+        document.scrollingElement.scrollTop = scrollValue;
+        scrollValue = scrollValue - 10;
+        console.log(scrollValue + 'px')
+      });
+    });
+  </script>
+</body>
+<html>
